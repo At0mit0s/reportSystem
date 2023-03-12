@@ -1,4 +1,8 @@
 ESX = exports["es_extended"]:getSharedObject()
+AdminRanks = {
+ ["admin"] = true,
+ ["superadmin"] = true,
+}
 
 RegisterCommand(Config.commandMember, function(source, args, rawCommand)
     if args[1] ~= nil and args[2] ~= nil then 
@@ -20,7 +24,7 @@ end)
 RegisterCommand(Config.commandAdmin, function()
     ESX.TriggerServerCallback('adminCheck', function(state)
         sendTranslation()
-        if state == 'admin'then 
+        if AdminRanks[state] then 
             SendNUIMessage({action='reportActive'})
             SetNuiFocus(true, true)
         else 
